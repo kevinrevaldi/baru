@@ -1,0 +1,131 @@
+{% extends "layout.html" %} {% block title %}Tentang Kami - Melanoma Scan{%
+  endblock %} {% block content %}
+  
+  <!-- Chatbot -->
+  <div class="chatbot-container">
+    <div class="chatbox">
+      <div class="chatbox-header">Chatbot</div>
+      <div class="chatbox-body" id="chatbox-body">
+        <div class="message bot">
+          <span> Silahkan tanya sesuatu </span>
+        </div>
+      </div>
+      <div class="chatbox-footer">
+        <input type="text" id="user-input" placeholder="Type a message..." />
+        <button id="send-button"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const userInput = document.getElementById("user-input");
+    const sendButton = document.getElementById("send-button");
+    const chatboxBody = document.getElementById("chatbox-body");
+  
+    sendButton.addEventListener("click", () => {
+      const userMessage = userInput.value.trim();
+      if (userMessage) {
+        const userMessageElement = document.createElement("div");
+        userMessageElement.classList.add("message", "user");
+        userMessageElement.textContent = userMessage;
+        chatboxBody.appendChild(userMessageElement);
+        userInput.value = "";
+  
+        chatboxBody.scrollTop = chatboxBody.scrollHeight;
+  
+        const botMessageElement = document.createElement("div");
+        botMessageElement.classList.add("message", "bot");
+        botMessageElement.textContent = "Bot is typing...";
+        chatboxBody.appendChild(botMessageElement);
+        chatboxBody.scrollTop = chatboxBody.scrollHeight;
+  
+        setTimeout(() => {
+          fetch(`/chatbot`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `message=${encodeURIComponent(userMessage)}`,
+          })
+            .then((response) => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                return response.json().then((err) => {
+                  throw new Error(err.error);
+                });
+              }
+            })
+            .then((data) => {
+              botMessageElement.textContent = data.response;
+  
+              //kalo mau ganti icon ganti aja di classList
+              const iconContainer = document.createElement("div");
+              iconContainer.classList.add("bot-icons");
+  
+              const copyIcon = document.createElement("i");
+              copyIcon.classList.add(
+                "fas",
+                "fa-copy",
+                "icon",
+                "copy-icon",
+                "mr-2"
+              );
+              copyIcon.addEventListener("click", () => {
+                navigator.clipboard
+                  .writeText(botMessageElement.textContent)
+                  .then(() => {
+                    alert("Text copied to clipboard!");
+                  });
+              });
+  
+              const likeIcon = document.createElement("i");
+              likeIcon.classList.add(
+                "fas",
+                "fa-thumbs-up",
+                "icon",
+                "like-icon",
+                "mr-2"
+              );
+              likeIcon.addEventListener("click", () => {
+                alert("You liked the message!");
+              });
+  
+              const dislikeIcon = document.createElement("i");
+              dislikeIcon.classList.add(
+                "fas",
+                "fa-thumbs-down",
+                "icon",
+                "dislike-icon",
+                "mr-2"
+              );
+              dislikeIcon.addEventListener("click", () => {
+                alert("You disliked the message!");
+              });
+  
+              //append icon kedalam container
+              iconContainer.appendChild(copyIcon);
+              iconContainer.appendChild(likeIcon);
+              iconContainer.appendChild(dislikeIcon);
+  
+              //append icon container ke bot message
+              botMessageElement.appendChild(iconContainer);
+  
+              //langsung ke scroll kebawah
+              chatboxBody.scrollTop = chatboxBody.scrollHeight;
+            })
+            .catch((error) => {
+              botMessageElement.textContent = error.message;
+            });
+        }, 1000); //delay sedetik
+      }
+    });
+  
+    userInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        sendButton.click();
+      }
+    });
+  </script>
+  
+  {% endblock %}
+  

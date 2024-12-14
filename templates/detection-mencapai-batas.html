@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melanoma Scan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: hsl(170, 100%, 95%);
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .scrolled {
+      padding: 16px 24px;
+    }
+
+    .main-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 40px;
+      width: 85%;
+      margin-left: 50px;
+      padding-bottom: 60px;
+    }
+
+    .main-box {
+      background-color: #b2f5ea;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      display: flex;
+      width: 100%;
+      position: relative;
+    }
+
+    .text-content {
+      flex: 2;
+      color: #2c7a7b;
+      margin-right: 30px;
+    }
+
+    .shield-image {
+      position: absolute;
+      right: -140px;
+      bottom: -60px;
+      width: 200px;
+      height: 200px;
+      transform: rotate(0deg) scale(1.1);
+      z-index: 10;
+    }
+
+    .shield-image img {
+      max-width: 160px;
+      height: auto;
+    }
+
+    .text-content h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    .text-content h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 24px;
+    }
+
+    .text-content p {
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .section {
+      padding: 80px 0;
+      background-color: #ffffff;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      color: #2c7a7b;
+      margin-bottom: 40px;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: #b2f5ea;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      padding: 24px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .card i {
+      font-size: 50px;
+      color: #2c7a7b;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 24px;
+      color: #2c7a7b;
+      margin-bottom: 16px;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #4a5568;
+      margin-bottom: 16px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .news-section {
+      padding: 60px 0;
+      background-color: #f1f5f9;
+    }
+
+    .news-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      width: 100%;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .news-card h4 {
+      font-size: 24px;
+      color: #2c7a7b;
+      margin-bottom: 16px;
+    }
+
+    .news-card p {
+      font-size: 16px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .navbar-toggle {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 6px;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 20px;
+    }
+
+    .navbar {
+      background-color: #75ddd0;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-expanded {
+      padding: 30px 60px;
+    }
+
+    .navbar-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .logo img {
+      margin-right: 10px;
+    }
+
+    .navbar-links {
+      display: flex;
+      list-style-type: none;
+      margin-left: auto;
+      align-items: center;
+    }
+
+    .navbar-links li {
+      margin-right: 24px;
+    }
+
+    .navbar .active {
+      color: #2c7a7b;
+    }
+
+    .navbar-links a {
+      color: #1a202c;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .navbar-links a:hover {
+      color: #2c7a7b;
+    }
+
+    .user-icon img {
+      border-radius: 50%;
+      margin-left: 16px;
+    }
+
+    .scrolled {
+      padding: 16px 24px;
+    }
+
+    .navbar-toggle {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 6px;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 20px;
+    }
+
+    .navbar-toggle div {
+      width: 30px;
+      height: 3px;
+      background-color: #1a202c;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-links {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-align: center;
+    }
+
+    .navbar-links.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar-toggle.active div:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .navbar-toggle.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .navbar-toggle.active div:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    footer {
+      background-color: #75ddd0;
+      padding: 40px 0;
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .footer-logo img {
+      height: 50px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .footer-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-links li a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-social a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+
+    .footer-social a:hover {
+      color: #2c7a7b;
+    }
+
+    .footer-bottom {
+      margin-top: 30px;
+      font-size: 12px;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .navbar-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background-color: #75ddd0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 16px 0;
+        z-index: 10;
+      }
+
+      .navbar-links.active {
+        display: flex;
+      }
+
+      .user-image img {
+        display: none;
+      }
+
+      .navbar-toggle {
+        display: flex;
+      }
+
+      .navbar-links li {
+        margin: 10px 0;
+      }
+
+      .logo img {
+        width: 150px;
+      }
+
+      .main-container {
+        width: 100%;
+        margin-left: 0;
+        text-align: center;
+      }
+
+      .main-box {
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .shield-image {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        transform: rotate(0deg) scale(0.8);
+        bottom: 0;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .card-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .card {
+        width: 90%;
+        margin-bottom: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="logo">
+        <a href="#" class="logo-link">
+          <img src="assets/image/logo.png" alt="Logo" height="50" />
+        </a>
+      </div>
+      <ul class="navbar-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="detection-1.html" class="active">Detection</a></li>
+        <li><a href="chatbot.html">Chatbot</a></li>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <div class="user-image">
+            <a href="/">
+              <img src="assets/image/user.png" alt="User Icon" class="rounded-full" width="40" />
+            </a>
+          </div>
+        </li>
+      </ul>
+      <div class="navbar-toggle">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="main-container">
+    <div class="main-box">
+      <div class="text-content">
+        <h2>Oops! Anda Telah Mencapai Batas Penggunaan Fitur Detection</h2>
+        <p>
+          Untuk menikmati fitur ini secara <strong>unlimited</strong>, silakan
+          <a href="login.html"><strong>Masuk</strong></a> jika Anda sudah memiliki akun.
+          Jika belum, segera <a href="register.html"><strong>Daftar</strong></a> dan nikmati kemudahan akses penuh fitur
+          kami.
+          Jangan sampai ketinggalan!
+        </p>
+      </div>
+      <div class="shield-image">
+        <img src="assets/image/perisai.png" alt="Shield" />
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-container row mx-0">
+        <div class="footer-address col-9">
+          <ul class="list-unstyled text-center text-md-left">
+            <li>
+              <i class="fas fa-map-marker-alt mr-2 mb-2"></i>Pasar Minggu,
+              Jakarta Selatan
+            </li>
+            <li><i class="fas fa-phone mr-2 mb-2"></i>+62 857 1656 9378</li>
+            <li>
+              <i class="fas fa-envelope mr-2 mb-2"></i>melanomascan@gmail.com
+            </li>
+          </ul>
+        </div>
+        <div class="footer-social col-3 text-center">
+          <p>
+            <i class="fab fa-instagram fa-2x"></i><a href="https://instagram.com/cypher.mind" target="_blank"
+              class="text-white">@cypher.mind</a>
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div class="footer-bottom text-center">
+        <div class="footer-logo text-center mb-3">
+          <img src="assets/image/logo.png" alt="Logo" height="50" />
+        </div>
+        <p>&copy; 2024 Melanoma Scan. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    const toggle = document.querySelector(".navbar-toggle");
+    const navbarLinks = document.querySelector(".navbar-links");
+
+    toggle.addEventListener("click", () => {
+      navbarLinks.classList.toggle("active");
+      toggle.classList.toggle("active");
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+  </script>
+</body>
+
+</html>

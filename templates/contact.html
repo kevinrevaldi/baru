@@ -1,0 +1,358 @@
+{% extends "layout.html" %}
+
+{% block title %}Tentang Kami - Melanoma Scan{% endblock %}
+
+{% block content %}
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body,
+  html {
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: hsl(170, 100%, 95%);
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .navbar {
+    background-color: #75ddd0;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-expanded {
+    padding: 30px 60px;
+  }
+
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .logo img {
+    margin-right: 10px;
+  }
+
+  .navbar-links {
+    display: flex;
+    list-style-type: none;
+    margin-left: auto;
+    align-items: center;
+  }
+
+  .navbar-links li {
+    margin-right: 24px;
+  }
+
+  .navbar .active {
+    color: #2c7a7b;
+  }
+
+  .navbar-links a {
+    color: #1a202c;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .navbar-links a:hover {
+    color: #2c7a7b;
+  }
+
+  .user-icon img {
+    border-radius: 50%;
+    margin-left: 16px;
+  }
+
+  .scrolled {
+    padding: 16px 24px;
+  }
+
+  .main-container {
+    display: flex;
+    margin-top: 40px;
+    width: 60%;
+    margin-top: 40px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 60px;
+  }
+
+  .main-box {
+    background-color: #b2f5ea;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .text-content {
+    color: #2c7a7b;
+  }
+
+  .text-content h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 24px;
+  }
+
+  .text-content p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .submit-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .btn-primary {
+    background-color: #2c7a7b;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #2a6765;
+  }
+
+  .navbar-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 20px;
+  }
+
+  .navbar-toggle div {
+    width: 30px;
+    height: 3px;
+    background-color: #1a202c;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-links.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 0;
+    z-index: 10;
+  }
+
+  .navbar-toggle.active div:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .navbar-toggle.active div:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-toggle.active div:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  footer {
+    background-color: #75ddd0;
+    padding: 40px 0;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .footer-logo img {
+    height: 50px;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  .footer-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer-links li a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-social a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 20px;
+    transition: color 0.3s;
+  }
+
+  .footer-social a:hover {
+    color: #2c7a7b;
+  }
+
+  .footer-bottom {
+    margin-top: 30px;
+    font-size: 12px;
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .navbar-links {
+      display: none;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background-color: #75ddd0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px 0;
+      z-index: 10;
+    }
+
+    .navbar-links.active {
+      display: flex;
+    }
+
+    .user-image img {
+      display: none;
+    }
+
+    .navbar-toggle {
+      display: flex;
+    }
+
+    .navbar-links li {
+      margin: 10px 0;
+    }
+
+    .logo img {
+      width: 150px;
+    }
+
+    .main-container {
+      width: 100%;
+      margin-left: 0;
+      text-align: center;
+    }
+
+    .main-box {
+      padding: 20px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .shield-image {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      transform: rotate(0deg) scale(0.8);
+      bottom: 0;
+    }
+
+    .section-title {
+      font-size: 28px;
+    }
+
+    .card-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card {
+      width: 90%;
+      margin-bottom: 16px;
+    }
+  }
+</style>
+<!-- Contact Section -->
+<section class="main-container">
+  <div class="main-box">
+    <div class="text-content">
+      <h1>Contact</h1>
+      <p>Sebelum memulai lebih jauh yuk berikan kami saran</p>
+      <form action="mailto:annisanurqoriah12@gmail.com" method="POST" enctype="text/plain">
+        <div class="form-group">
+          <label for="name" class="form-label">Nama:</label>
+          <input type="text" class="form-control" name="name" placeholder="Nama" required />
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" name="email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+          <label for="phone" class="form-label">Telepon:</label>
+          <input type="text" class="form-control" name="phone" placeholder="Telepon" required />
+        </div>
+        <div class="form-group">
+          <label for="feedback" class="form-label">Kritik & Saran:</label>
+          <textarea class="form-control" name="feedback" placeholder="Kritik & Saran" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Kirim</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block title %}Tentang Kami - Melanoma Scan{%
+endblock %} {% block content %}
+<section class="main-container">
+  <div class="main-box">
+    <div class="text-content">
+      <h2>Tentang Kami</h2>
+      <p>
+        Website Kami Adalah Platform Kesehatan Inovatif Yang Menggunakan
+        Teknologi Machine Learning Untuk Mendeteksi Kanker Melanoma Secara Cepat
+        Dan Akurat. Dengan Memanfaatkan Layanan Cloud Seperti AWS SageMaker,
+        Kami Menyediakan Alat Analisis Berbasis AI Yang Dirancang Untuk Membantu
+        Pengguna Memantau Kesehatan Kulit Mereka. Melalui Antarmuka Yang
+        Sederhana, Pengguna Dapat Mengunggah Gambar Kulit Mereka Untuk
+        Mendapatkan Hasil Analisis Awal Dan Rekomendasi Lebih Lanjut. Misi Kami
+        Adalah Meningkatkan Kesadaran Dan Deteksi Dini Kanker Kulit Demi
+        Mendukung Kesehatan Masyarakat.
+      </p>
+    </div>
+    <div class="shield-image">
+      <img
+        src="{{ url_for('static', filename='images/perisai.png') }}"
+        alt="Shield"
+      />
+    </div>
+  </div>
+</section>
+{% endblock %}

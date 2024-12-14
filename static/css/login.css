@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #75DDD0;
+    --secondary-color: #277963;
+    --text-color: #12192c;
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.shape-circle {
+    position: absolute;
+    top: -400px;
+    right: -600px;
+    width: 600px;
+    height: 600px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    z-index: -1; /* Letakkan shape di belakang */
+}
+
+.login-box {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    z-index: 1;
+    position: relative;
+}
+
+.form-header {
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 50px;
+    margin-bottom: 1rem;
+}
+
+.form-header h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    outline: none;
+    font-family: var(--font-family);
+}
+
+.input-group input:focus {
+    border-color: var(--primary-color);
+}
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+.register-link {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+}
+
+.register-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Gambar dokter di luar box */
+.doctor-image {
+    position: absolute;
+    bottom: 50px;
+    right: -20px;
+    z-index: 0;
+}
+
+.doctor-image img {
+    max-width: 500px;
+    height: auto;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 1.5rem;
+    }
+
+    .form-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .doctor-image img {
+        max-width: 100px;
+    }
+}

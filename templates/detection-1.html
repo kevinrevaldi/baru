@@ -1,0 +1,358 @@
+{% extends "layout.html" %} {% block title %}Tentang Kami - Melanoma Scan{%
+endblock %} {% block content %}
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+  .scrolled {
+    padding: 16px 24px;
+  }
+
+  .main-container {
+    display: flex;
+    margin-top: 40px;
+    width: 60%;
+    margin-top: 40px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 60px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-box {
+    background-color: #b2f5ea;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text-content {
+    color: #2c7a7b;
+    text-align: center;
+  }
+
+  .text-content h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 24px;
+  }
+
+  .text-content p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px; /* Jarak antar elemen */
+  }
+
+  .upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #6fe3c1;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    cursor: pointer;
+    width: 250px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .upload-input {
+    display: none;
+  }
+
+  .upload-btn i {
+    margin-right: 10px;
+  }
+
+  .upload-btn:hover {
+    background-color: #5bc0a8;
+  }
+
+  .upload-btn span {
+    flex-grow: 1;
+    text-align: center; /* Agar teks berada di tengah */
+  }
+
+  .upload-btn i:last-child {
+    margin-left: 10px; /* Jarak untuk ikon terakhir */
+  }
+
+  #file-name {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #2c7a7b;
+    font-style: italic;
+  }
+
+  button[type="submit"] {
+    background-color: #4caf93;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #3e8b75;
+  }
+
+  footer {
+    background-color: #75ddd0;
+    padding: 40px 0;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .footer-logo img {
+    height: 50px;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  .footer-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer-links li a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-social a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 20px;
+    transition: color 0.3s;
+  }
+
+  .footer-social a:hover {
+    color: #2c7a7b;
+  }
+
+  .footer-bottom {
+    margin-top: 30px;
+    font-size: 12px;
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .navbar-links {
+      display: none;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background-color: #75ddd0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px 0;
+      z-index: 10;
+    }
+
+    .navbar-links.active {
+      display: flex;
+    }
+
+    .user-image img {
+      display: none;
+    }
+
+    .navbar-toggle {
+      display: flex;
+    }
+
+    .navbar-links li {
+      margin: 10px 0;
+    }
+
+    .logo img {
+      width: 150px;
+    }
+
+    .main-container {
+      width: 90%;
+      margin-left: 0;
+      text-align: center;
+    }
+
+    .main-box {
+      padding: 20px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .text-content h1 {
+      font-size: 28px; /* Ukuran judul lebih kecil */
+    }
+
+    .text-content p {
+      font-size: 14px; /* Ukuran teks lebih kecil */
+    }
+
+    .upload-btn {
+      width: 80%;
+      font-size: 14px; /* Font lebih kecil */
+    }
+
+    button[type="submit"] {
+      width: 80%;
+      font-size: 14px; /* Font lebih kecil */
+    }
+
+    #file-name {
+      font-size: 12px; /* Ukuran font lebih kecil */
+    }
+
+    .shield-image {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      transform: rotate(0deg) scale(0.8);
+      bottom: 0;
+    }
+
+    .card-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card {
+      width: 90%;
+      margin-bottom: 16px;
+    }
+  }
+</style>
+
+<!-- Main Content -->
+<div class="main-container">
+  <div class="main-box">
+    <div class="text-content">
+      <h1>Unggah Foto</h1>
+      <img
+        src="{{ url_for('static', filename='images/perisai.png') }}"
+        alt="Perisai"
+        width="150"
+        class="mb-3"
+      />
+      <p>Deteksi kesehatan kulitmu sekarang</p>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+      <p
+        id="file-name"
+        style="text-align: center; margin-top: 10px; color: #2c7a7b"
+      ></p>
+      <label for="image" class="upload-btn">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <span>Pilih File</span>
+        <input
+          type="file"
+          name="image"
+          id="image"
+          class="upload-input"
+          accept="image/*"
+          required
+        />
+        <i class="fas fa-arrow-right"></i>
+      </label>
+      <button type="submit" class="upload-btn col-3">Unggah</button>
+    </form>
+
+    {% if not session.user_id %}
+    <div class="guest-usage-info">
+      <p>Anda telah mengunggah {{ guest_uploads }} gambar sebagai tamu.</p>
+      <p>Anda dapat mengunggah {{ 3 - guest_uploads }} gambar lagi.</p>
+    </div>
+    {% if guest_uploads >= 3 %}
+    <script>
+      window.onload = function () {
+        $("#uploadLimitModal").modal("show");
+      };
+    </script>
+    {% endif %} {% endif %}
+  </div>
+</div>
+
+<!-- Modal for Upload Limit -->
+<div
+  class="modal fade"
+  id="uploadLimitModal"
+  tabindex="-1"
+  aria-labelledby="uploadLimitModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadLimitModalLabel">
+          Batas Unggahan Tercapai
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Anda dapat mengunggah {{ 3 - guest_uploads }} gambar lagi.</p>
+        <p>
+          Batas unggahan sebagai tamu telah tercapai. Silakan login untuk
+          mengunggah lebih banyak gambar.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById("image").addEventListener("change", function () {
+    const fileName = this.files[0]?.name || "Belum ada file yang dipilih";
+    document.getElementById("file-name").textContent = fileName;
+  });
+</script>
+
+{% endblock %}

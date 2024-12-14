@@ -1,0 +1,84 @@
+{% extends 'layout.html' %} {% block title %}Home - Melanoma Scan{% endblock %}
+{% block content %}
+<!-- Main Section -->
+<section class="main-container">
+  <div class="main-box">
+    <div class="text-content">
+      <h2>Halo, Selamat Datang</h2>
+      <h2>{{ session.get('username', 'Pengunjung')|capitalize }}</h2>
+      <p>
+        Tahukah anda bahwa Kanker melanoma merupakan sejenis kanker kulit yang
+        agresif dan berasal dari sel pigmen kulit melanosit. Deteksi dini itu
+        sangat penting, jadi periksalah kulit Anda secara rutin dan juga berkala serta waspadai
+        perubahan pada tahi lalat atau bintik-bintik. Beri Kesadaran penuh untuk menyelamatkan nyawa Anda.
+      </p>
+    </div>
+    <div class="shield-image">
+      <img src="{{ url_for('static', filename='images/perisai.png') }}" alt="Shield" />
+    </div>
+  </div>
+</section>
+
+<!-- Section Cards -->
+<section class="section">
+  <h2 class="section-title">Layanan Kami</h2>
+  <div class="card-container">
+    <div class="card">
+      <i class="fas fa-heartbeat"></i>
+      <h3>Deteksi Kanker Melanoma</h3>
+      <p>
+        Gunakan alat canggih untuk mendeteksi tanda-tanda kanker kulit secara
+        dini.
+      </p>
+    </div>
+    <div class="card">
+      <i class="fas fa-laptop-medical"></i>
+      <h3>Konsultasi</h3>
+      <p>Berbicara langsung dengan ahli melalui panggilan video.</p>
+    </div>
+    <div class="card">
+      <i class="fas fa-comments"></i>
+      <h3>Chatbot Kesehatan</h3>
+      <p>
+        Gunakan chatbot kami untuk mendapatkan informasi medis dengan cepat dan
+        mudah.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- News Section -->
+<section class="news-section py-5">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-4 mb-3">
+        <img src="https://nexgoal.com/wp-content/uploads/2021/08/Top-Trends-Medical-Device-1920x1000-1-1536x800.jpg"
+          alt="News Image" class="img-fluid rounded" />
+      </div>
+      <div class="col-md-8">
+        <h3>"Waspadai, Ciri-ciri Tahi Lalat Gejala Kanker Kulit Melanoma"</h3>
+        <p>Kanker kulit melanoma bisa muncul di dekat
+          mata, punggung, kaki, lengan, wajah, atau bagian tubuh yang kerap terpapar sinar matahari.
+          Di beberapa kasus yang jarang terjadi, melanoma juga bisa tumbuh di telapak tangan, telapak kaki, atau bantalan kuku.
+          Artikel ini telah tayang di Kompas.com.
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <img src="https://teguar.com/wp-content/w3-webp/uploads/2023/07/iStock-1396801868-1024x683.jpgw3.webp"
+          alt="News Image" class="img-fluid rounded" />
+      </div>
+      <div class="col-md-8">
+        <h3>Teknologi AI dalam Deteksi Kanker</h3>
+        <p>Teknologi kecerdasan buatan (AI) kini digunakan untuk mendeteksi kanker secara lebih cepat dan akurat. 
+          AI dapat menganalisis data medis seperti gambar radiologi, mendeteksi pola awal kanker, 
+          termasuk melanoma dan kanker paru-paru, yang sulit dikenali oleh dokter. 
+          Solusi berbasis AI ini membantu meningkatkan deteksi dini,
+          memberikan peluang perawatan yang lebih efektif, dan mendukung pengambilan keputusan medis secara presisi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
