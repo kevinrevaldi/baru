@@ -18,8 +18,8 @@ bedrock_client = boto3.client(
 def get_bedrock_response(prompt):
     try:
         response = bedrock_client.invoke_model(
-            modelId='anthropic.claude-v2',
-            contentType='application/json',
+            modelId='anthropic.claude-v2',  # Gunakan model yang benar
+            contentType='application/json',  # Pengaturan content-type
             accept='application/json',
             body=json.dumps({
                 "prompt": prompt,
@@ -28,15 +28,11 @@ def get_bedrock_response(prompt):
             })
         )
         response_body = response['body'].read().decode('utf-8')
-        return json.loads(response_body).get('completion', "No response received.")
+        return json.loads(response_body).get('completion', "Tidak ada jawaban yang diterima.")
     except Exception as e:
-        # Log the actual error to debug
-        print("Error details:", str(e))
-        return "There was an error connecting to the AI model. Please try again later."
-
-
-
-
+        print("Error details:", str(e))  # Log error
+        return "Terjadi kesalahan saat mengakses model AI."
+    
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'whitebrim'
 app.config.from_object('config.Config')
@@ -119,7 +115,6 @@ def chatbot():
     user_logged_in = 'user_id' in session
     guest_uploads, guest_chatbot_interactions = get_guest_usage()
    
-    
     if request.method == 'POST':
         if not user_logged_in and guest_chatbot_interactions >= 3:
             return jsonify({'error': 'You have reached the usage limit for the Chatbot. Please log in or register to continue.'}), 403
